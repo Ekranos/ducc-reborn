@@ -1,4 +1,4 @@
-extern crate ducc;
+extern crate ducc_reborn;
 #[macro_use]
 extern crate serde;
 
@@ -9,7 +9,7 @@ pub mod de;
 pub use error::{Error, Result};
 pub use ser::Serializer;
 
-use ducc::{Ducc, Value, Result as DuccResult};
+use ducc_reborn::{Ducc, Value, Result as DuccResult};
 
 pub fn to_value<T: serde::Serialize>(ducc: &Ducc, value: T) -> DuccResult<Value> {
     let serializer = ser::Serializer { ducc };

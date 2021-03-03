@@ -1,4 +1,4 @@
-use ducc::{Array, Ducc, Object, String as DuccString, Value};
+use ducc_reborn::{Array, Ducc, Object, String as DuccString, Value};
 use serde;
 use super::{Error, Result, to_value};
 

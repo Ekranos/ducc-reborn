@@ -287,7 +287,7 @@ impl Ducc {
     /// # Example
     ///
     /// ```
-    /// # use ducc::Ducc;
+    /// # use ducc_reborn::Ducc;
     /// # let ducc = Ducc::new();
     /// if let Some(entry) = ducc.inspect_call_stack_entry(-2) {
     ///    let file_name = entry.function.into_object().get::<_, String>("fileName").unwrap();

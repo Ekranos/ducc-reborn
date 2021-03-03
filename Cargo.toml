@@ -1,7 +1,7 @@
 [workspace]
 
 members = [
-    "ducc",
-    "ducc-sys",
-    "ducc-serde",
+    "ducc-reborn",
+    "ducc-reborn-sys",
+    "ducc-reborn-serde",
 ]

@@ -1,4 +1,4 @@
-use ducc::{Elements, Properties, Value};
+use ducc_reborn::{Elements, Properties, Value};
 use error::{Error, Result};
 use serde;
 use serde::de::IntoDeserializer;

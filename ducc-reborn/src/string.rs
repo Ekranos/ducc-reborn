@@ -5,6 +5,7 @@ use std::borrow::Cow;
 use std::slice;
 use std::string::String as StdString;
 use types::Ref;
+use std::convert::TryInto;
 
 /// An immutable, interned JavaScript string managed by Duktape.
 ///
@@ -55,7 +56,7 @@ impl<'ducc> String<'ducc> {
                 let mut len = 0;
                 let data = ffi::duk_get_lstring(ctx, -1, &mut len);
                 assert!(!data.is_null());
-                let bytes = slice::from_raw_parts(data as *const u8, len + 1 as usize);
+                let bytes = slice::from_raw_parts(data as *const u8, (len + 1).try_into().expect("can't convert"));
                 assert!(bytes[bytes.len() - 1] == 0);
                 ffi::duk_pop(ctx);
                 bytes

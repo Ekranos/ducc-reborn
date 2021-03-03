@@ -30,8 +30,9 @@ fn value_cross_contamination() {
 
 #[test]
 fn timeout() {
+    dbg!("foo");
     let ducc = Ducc::new();
-    let start = Instant::now();
+    let start = dbg!(Instant::now());
     let cancel_fn = move || Instant::now().duration_since(start) > Duration::from_millis(500);
     let settings = ExecSettings { cancel_fn: Some(Box::new(cancel_fn)) };
     let result: Result<(), _> = ducc.exec("for (;;) {}", None, settings);

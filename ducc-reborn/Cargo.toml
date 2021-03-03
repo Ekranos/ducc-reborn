@@ -1,0 +1,15 @@
+[package]
+name = "ducc-reborn"
+version = "0.1.5"
+description = "Rust bindings for Duktape, the embedded JavaScript engine"
+authors = ["Skyler Lipthay <sl@skylerlipthay.com>", "Marvin Lee Fimmel <kontakt@ekranos.me>"]
+repository = "https://github.com/Ekranos/ducc-reborn"
+license = "MIT"
+
+[dependencies]
+cesu8 = "1.1"
+
+[dependencies.ducc-reborn-sys]
+version = "0.1.2"
+path = "../ducc-reborn-sys"
+features = ["use-exec-timeout-check"]

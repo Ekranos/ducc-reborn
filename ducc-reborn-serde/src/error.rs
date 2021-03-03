@@ -1,4 +1,4 @@
-use ducc::{Error as DuccError, ResultExt};
+use ducc_reborn::{Error as DuccError, ResultExt};
 use serde;
 use std::fmt;
 use std::error::Error as StdError;

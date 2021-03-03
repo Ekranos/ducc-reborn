@@ -147,10 +147,10 @@ pub(crate) unsafe fn push_error(ctx: *mut ffi::duk_context, error: Error) {
             ptr::null_mut(),
         );
 
-        ffi::duk_push_lstring(ctx, cstr_name.as_ptr(), cstr_name.as_bytes().len());
+        ffi::duk_push_lstring(ctx, cstr_name.as_ptr(), cstr_name.as_bytes().len() as u64);
         ffi::duk_put_prop_string(ctx, -2, cstr!("name"));
         if let Some(cstr_msg) = cstr_msg {
-            ffi::duk_push_lstring(ctx, cstr_msg.as_ptr(), cstr_msg.as_bytes().len());
+            ffi::duk_push_lstring(ctx, cstr_msg.as_ptr(), cstr_msg.as_bytes().len() as u64);
             ffi::duk_put_prop_string(ctx, -2, cstr!("message"));
         }
         ffi::duk_push_pointer(ctx, Box::into_raw(desc.cause) as *mut _);
@@ -229,7 +229,7 @@ pub(crate) unsafe fn push_bytes(ctx: *mut ffi::duk_context, value: &[u8]) -> Res
         protect_duktape_closure(ctx, 0, 1, |ctx| {
             ffi::duk_require_stack(ctx, 1);
             let len = value.len();
-            let data = ffi::duk_push_fixed_buffer(ctx, len);
+            let data = ffi::duk_push_fixed_buffer(ctx, len as u64);
             ptr::copy(value.as_ptr(), data as *mut u8, len);
         })
     })
@@ -244,7 +244,7 @@ pub(crate) unsafe fn push_str(ctx: *mut ffi::duk_context, value: &str) -> Result
     assert_stack!(ctx, 1, {
         protect_duktape_closure(ctx, 0, 1, |ctx| {
             ffi::duk_require_stack(ctx, 1);
-            ffi::duk_push_lstring(ctx, string.as_ptr(), string.as_bytes().len());
+            ffi::duk_push_lstring(ctx, string.as_ptr(), string.as_bytes().len() as u64);
         })
     })
 }

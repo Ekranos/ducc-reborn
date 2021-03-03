@@ -5,6 +5,7 @@ use types::Ref;
 use util::{protect_duktape_closure, StackGuard};
 use function::Function;
 use value::{FromValue, ToValue, ToValues, Value};
+use std::convert::TryInto;
 
 /// Reference to a JavaScript object (guaranteed to not be an array or function).
 #[derive(Clone, Debug)]
@@ -65,7 +66,7 @@ impl<'ducc> Object<'ducc> {
     /// # Example
     ///
     /// ```
-    /// # use ducc::{Ducc, PropertyDescriptor};
+    /// # use ducc_reborn::{Ducc, PropertyDescriptor};
     /// # let ducc = Ducc::new();
     /// let obj = ducc.create_object();
     /// let get = ducc.create_function(|inv| Ok(24));
@@ -184,7 +185,7 @@ impl<'ducc> Object<'ducc> {
             assert_stack!(ducc.ctx, 0, {
                 ducc.push_ref(&self.0);
                 protect_duktape_closure(ducc.ctx, 1, 0, |ctx| {
-                    ffi::duk_get_length(ctx, -1)
+                    ffi::duk_get_length(ctx, -1).try_into().expect("can't convert")
                 })
             })
         }

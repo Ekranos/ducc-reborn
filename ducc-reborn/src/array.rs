@@ -69,7 +69,7 @@ impl<'ducc> Array<'ducc> {
             assert_stack!(ducc.ctx, 0, {
                 ducc.push_ref(&self.0);
                 protect_duktape_closure(ducc.ctx, 1, 0, |ctx| {
-                    ffi::duk_get_length(ctx, -1)
+                    ffi::duk_get_length(ctx, -1) as usize
                 })
             })
         }
